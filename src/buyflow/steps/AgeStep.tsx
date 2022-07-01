@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 interface AgeStepProps {
-  cb: (field: string, value: number) => void
+  cb: (newData: { [key: string]: string | number }) => void
 }
 
 const AgeStep: React.FC<AgeStepProps> = (props) => {
@@ -18,7 +18,7 @@ const AgeStep: React.FC<AgeStepProps> = (props) => {
           value={age}
         ></input>
       </div>
-      <button onClick={() => props.cb('age', age)}>Next</button>
+      <button onClick={() => props.cb({ age: age })}>Next</button>
     </>
   )
 }
