@@ -8,14 +8,14 @@ interface BuyflowProps {
 }
 
 export enum ProductIds {
-  devIns = 'dev_ins',
+  developerInsurance = 'dev_ins',
 }
 
 const PRODUCT_IDS_TO_NAMES = {
-  [ProductIds.devIns]: 'Developer Insurance',
+  [ProductIds.developerInsurance]: 'Developer Insurance',
 }
 
-const Buyflow: React.FC<BuyflowProps> = (props) => {
+const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
   const [currentStep, setStep] = useState('email')
   const [collectedData, updateData] = useState({
     email: '',
@@ -27,7 +27,7 @@ const Buyflow: React.FC<BuyflowProps> = (props) => {
   }
   return (
     <>
-      <h4>Buying {PRODUCT_IDS_TO_NAMES[props.productId]}</h4>
+      <h4>Buying {PRODUCT_IDS_TO_NAMES[productId]}</h4>
       {(currentStep === 'email' && <EmailStep cb={getStepCallback('age')} />) ||
         (currentStep === 'age' && (
           <AgeStep cb={getStepCallback('summary')} />
