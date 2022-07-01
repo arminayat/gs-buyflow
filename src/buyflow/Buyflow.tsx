@@ -24,12 +24,14 @@ const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
     email: '',
     age: 0,
   })
+
   const getStepCallback = (nextStep: string) => (newData: {
     [key: string]: string | number
   }) => {
     updateData({ ...collectedData, ...newData })
     setStep(nextStep)
   }
+
   return (
     <>
       <h4>Buying {PRODUCT_IDS_TO_NAMES[productId]}</h4>

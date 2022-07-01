@@ -1,25 +1,30 @@
-import React, { useState } from 'react'
+import React from 'react'
+import Form from '../../components/Form'
+import Input from '../../components/Input'
+import * as yup from 'yup'
 
-interface AgeStepProps {
-  cb: (newData: { [key: string]: string | number }) => void
-}
+import { StepProps } from './types'
 
-const AgeStep: React.FC<AgeStepProps> = (props) => {
-  const [age, setAge] = useState(0)
+interface AgeStepProps extends StepProps {}
+
+const validationSchema = yup
+  .object({
+    age: yup
+      .number()
+      .typeError('age must be a number')
+      .positive('age must be greater than zero')
+      .required('age is required'),
+  })
+  .required()
+
+const AgeStep: React.FC<AgeStepProps> = ({ cb }) => {
   return (
-    <>
+    <Form onSubmit={cb} validationSchema={validationSchema}>
       <div>
-        Age:{' '}
-        <input
-          type="number"
-          onChange={({ target: { value } }) => {
-            setAge(Number(value))
-          }}
-          value={age}
-        ></input>
+        Age: <Input name="age" type="number" />
       </div>
-      <button onClick={() => props.cb({ age: age })}>Next</button>
-    </>
+      <button type="submit">Next</button>
+    </Form>
   )
 }
 

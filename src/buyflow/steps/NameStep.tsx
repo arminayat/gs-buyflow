@@ -1,41 +1,29 @@
-import React, { useState } from 'react'
+import React from 'react'
+import Form from '../../components/Form'
+import Input from '../../components/Input'
+import * as yup from 'yup'
+import { StepProps } from './types'
 
-interface NameStepProps {
-  cb: (newData: { [key: string]: string | number }) => void
-}
+interface NameStepProps extends StepProps {}
+
+const validationSchema = yup
+  .object({
+    firstname: yup.string().required(),
+    lastname: yup.string().required(),
+  })
+  .required()
 
 const NameStep: React.FC<NameStepProps> = ({ cb }) => {
-  const [firstname, setFirstname] = useState('')
-  const [lastname, setLastname] = useState('')
-
-  const onSubmit = () => {
-    cb({ firstname, lastname })
-  }
-
   return (
-    <>
+    <Form onSubmit={cb} validationSchema={validationSchema}>
       <div>
-        First name:{' '}
-        <input
-          type="text"
-          onChange={({ target: { value } }) => {
-            setFirstname(value)
-          }}
-          value={firstname}
-        ></input>
+        First name: <Input name="firstname" />
       </div>
       <div>
-        Last name:{' '}
-        <input
-          type="text"
-          onChange={({ target: { value } }) => {
-            setLastname(value)
-          }}
-          value={lastname}
-        ></input>
+        Last name: <Input name="lastname" />
       </div>
-      <button onClick={onSubmit}>Next</button>
-    </>
+      <button type="submit">Next</button>
+    </Form>
   )
 }
 

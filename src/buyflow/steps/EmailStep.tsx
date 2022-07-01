@@ -1,25 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
+import Form from '../../components/Form'
+import Input from '../../components/Input'
+import * as yup from 'yup'
+import { StepProps } from './types'
 
-interface EmailStepProps {
-  cb: (newData: { [key: string]: string | number }) => void
-}
+interface EmailStepProps extends StepProps {}
 
-const EmailStep: React.FC<EmailStepProps> = (props) => {
-  const [email, setEmail] = useState('')
+const validationSchema = yup
+  .object({
+    email: yup.string().email().required(),
+  })
+  .required()
+
+const EmailStep: React.FC<EmailStepProps> = ({ cb }) => {
   return (
-    <>
+    <Form onSubmit={cb} validationSchema={validationSchema}>
       <div>
-        Email:{' '}
-        <input
-          type="email"
-          onChange={({ target: { value } }) => {
-            setEmail(value)
-          }}
-          value={email}
-        ></input>
+        Email: <Input name="email" />
       </div>
-      <button onClick={() => props.cb({ email: email })}>Next</button>
-    </>
+      <button type="submit">Next</button>
+    </Form>
   )
 }
 
