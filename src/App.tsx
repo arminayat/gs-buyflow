@@ -13,12 +13,18 @@ const App = () => {
           <img src={logo} className="App-logo" alt="logo" />
         </header>
         <Switch>
-          <Route path="/buy/insurance_dev">
+          <Route path="/buy/insurance-designers">
+            <Buyflow productId={ProductIds.designerInsurance} />
+          </Route>
+          <Route path="/buy/insurance-developers">
             <Buyflow productId={ProductIds.developerInsurance} />
           </Route>
           <Route path="/">
-            <p>Welcome to Getsafe's Developer Insurance</p>
-            <Link to="/buy/insurance_dev">Get started!</Link>
+            <p>Welcome to Getsafe Insurance. Lets get started!</p>
+            <Link to="/buy/insurance-developers">developer insurance</Link>
+            <br />
+            <br />
+            <Link to="/buy/insurance-designers">designer insurance</Link>
           </Route>
         </Switch>
       </div>
