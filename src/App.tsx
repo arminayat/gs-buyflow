@@ -4,6 +4,7 @@ import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Buyflow from './buyflow'
 import { ProductIds } from './buyflow/types'
+import Menu from './menu'
 
 const App = () => {
   return (
@@ -20,11 +21,7 @@ const App = () => {
             <Buyflow productId={ProductIds.developerInsurance} />
           </Route>
           <Route path="/">
-            <p>Welcome to Getsafe Insurance. Lets get started!</p>
-            <Link to="/buy/insurance-developers">developer insurance</Link>
-            <br />
-            <br />
-            <Link to="/buy/insurance-designers">designer insurance</Link>
+            <Menu />
           </Route>
         </Switch>
       </div>
