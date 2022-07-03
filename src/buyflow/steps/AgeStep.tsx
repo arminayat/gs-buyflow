@@ -17,9 +17,9 @@ const validationSchema = yup
   })
   .required()
 
-const AgeStep: React.FC<AgeStepProps> = ({ cb }) => {
+const AgeStep: React.FC<AgeStepProps> = ({ handleSubmit }) => {
   return (
-    <Form onSubmit={cb} validationSchema={validationSchema}>
+    <Form onSubmit={handleSubmit} validationSchema={validationSchema}>
       <div>
         Age: <Input name="age" type="number" data-testid="age-input" />
       </div>

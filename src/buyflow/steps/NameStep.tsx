@@ -13,9 +13,9 @@ const validationSchema = yup
   })
   .required()
 
-const NameStep: React.FC<NameStepProps> = ({ cb }) => {
+const NameStep: React.FC<NameStepProps> = ({ handleSubmit }) => {
   return (
-    <Form onSubmit={cb} validationSchema={validationSchema}>
+    <Form onSubmit={handleSubmit} validationSchema={validationSchema}>
       <div>
         First name: <Input name="firstname" data-testid="firstname-input" />
       </div>

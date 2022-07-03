@@ -12,9 +12,9 @@ const validationSchema = yup
   })
   .required()
 
-const EmailStep: React.FC<EmailStepProps> = ({ cb }) => {
+const EmailStep: React.FC<EmailStepProps> = ({ handleSubmit }) => {
   return (
-    <Form onSubmit={cb} validationSchema={validationSchema}>
+    <Form onSubmit={handleSubmit} validationSchema={validationSchema}>
       <div>
         Email: <Input name="email" data-testid="email-input" />
       </div>
