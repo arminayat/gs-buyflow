@@ -17,10 +17,10 @@ const NameStep: React.FC<NameStepProps> = ({ cb }) => {
   return (
     <Form onSubmit={cb} validationSchema={validationSchema}>
       <div>
-        First name: <Input name="firstname" />
+        First name: <Input name="firstname" data-testid="firstname-input" />
       </div>
       <div>
-        Last name: <Input name="lastname" />
+        Last name: <Input name="lastname" data-testid="lastname-input" />
       </div>
       <button type="submit">Next</button>
     </Form>

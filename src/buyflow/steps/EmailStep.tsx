@@ -16,7 +16,7 @@ const EmailStep: React.FC<EmailStepProps> = ({ cb }) => {
   return (
     <Form onSubmit={cb} validationSchema={validationSchema}>
       <div>
-        Email: <Input name="email" />
+        Email: <Input name="email" data-testid="email-input" />
       </div>
       <button type="submit">Next</button>
     </Form>

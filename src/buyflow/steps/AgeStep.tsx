@@ -21,7 +21,7 @@ const AgeStep: React.FC<AgeStepProps> = ({ cb }) => {
   return (
     <Form onSubmit={cb} validationSchema={validationSchema}>
       <div>
-        Age: <Input name="age" type="number" />
+        Age: <Input name="age" type="number" data-testid="age-input" />
       </div>
       <button type="submit">Next</button>
     </Form>
