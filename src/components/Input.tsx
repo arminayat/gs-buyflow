@@ -1,18 +1,7 @@
 import React, { FC, InputHTMLAttributes } from 'react'
-import { ChangeHandler, RegisterOptions, useFormContext } from 'react-hook-form'
-
-type registerFunction = (
-  name: string,
-  RegisterOptions?: RegisterOptions
-) => {
-  onChange: ChangeHandler
-  onBlur: ChangeHandler
-  name: string
-  ref: React.Ref<any>
-}
-
+import { useFormContext, UseFormRegister, UseFormReturn } from 'react-hook-form'
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  register?: registerFunction
+  register?: UseFormRegister<any>
   name: string
 }
 
@@ -24,15 +13,9 @@ export const ConnectForm = ({ children }: any) => {
 const Input: FC<InputProps> = ({ register = () => {}, name, ...rest }) => {
   return (
     <ConnectForm>
-      {({
-        register,
-        formState: { errors },
-      }: {
-        register: registerFunction
-        formState: any
-      }) => (
+      {({ register, formState: { errors } }: UseFormReturn) => (
         <>
-          <input {...register(name)} {...rest} />
+          <input {...register(`${name}` as const)} {...rest} />
           <p>{errors[name]?.message}</p>
         </>
       )}
