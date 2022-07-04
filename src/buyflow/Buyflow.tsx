@@ -1,40 +1,39 @@
 import React, { useState } from 'react'
-import AgeStep from './AgeStep'
-import EmailStep from './EmailStep'
-import SummaryStep from './SummaryStep'
+import { PRODUCT_IDS_TO_NAMES } from '../constants/product'
+import Steps from './steps'
+import { ProductIds } from './types'
 
 interface BuyflowProps {
   productId: ProductIds
 }
 
-export enum ProductIds {
-  devIns = 'dev_ins',
+export interface ICollectedData {
+  firstname?: string
+  lastname?: string
+  email: string
+  age: number
 }
 
-const PRODUCT_IDS_TO_NAMES = {
-  [ProductIds.devIns]: 'Developer Insurance',
-}
-
-const Buyflow: React.FC<BuyflowProps> = (props) => {
-  const [currentStep, setStep] = useState('email')
-  const [collectedData, updateData] = useState({
+const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
+  const [collectedData, setCollectedData] = useState<ICollectedData>({
+    firstname: '',
+    lastname: '',
     email: '',
     age: 0,
   })
-  const getStepCallback = (nextStep: string) => (field: string, value: any) => {
-    updateData({ ...collectedData, [field]: value })
-    setStep(nextStep)
+
+  const handleDataSubmit = (newData: { [key: string]: string | number }) => {
+    setCollectedData({ ...collectedData, ...newData })
   }
+
   return (
     <>
-      <h4>Buying {PRODUCT_IDS_TO_NAMES[props.productId]}</h4>
-      {(currentStep === 'email' && <EmailStep cb={getStepCallback('age')} />) ||
-        (currentStep === 'age' && (
-          <AgeStep cb={getStepCallback('summary')} />
-        )) ||
-        (currentStep === 'summary' && (
-          <SummaryStep collectedData={collectedData} />
-        ))}
+      <h4>Buying {PRODUCT_IDS_TO_NAMES[productId]}</h4>
+      <Steps
+        productId={productId}
+        handleDataSubmit={handleDataSubmit}
+        collectedData={collectedData}
+      />
     </>
   )
 }
